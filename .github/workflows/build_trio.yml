@@ -324,7 +324,16 @@ jobs:
       # Sync the GitHub runner clock with the Windows time server (workaround as suggested in https://github.com/actions/runner/issues/2996)
       - name: Sync clock
         run: sudo sntp -sS time.windows.com
+#PJD test #2
+      - name: Verify Xcode used for build step
+        run: |
+          echo "DEVELOPER_DIR=$DEVELOPER_DIR"
+          xcode-select -p
+          which xcodebuild
+          xcodebuild -version
+          xcodebuild -showsdks
 
+    #end PJD #2
       # Build signed Trio IPA file
       - name: Fastlane Build & Archive
         run: bundle exec fastlane build_trio
