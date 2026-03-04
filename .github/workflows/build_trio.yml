@@ -361,9 +361,19 @@ jobs:
           fi
 
     #end PJD3
+#PJD4
+      - name: Select Xcode version
+        run: sudo xcode-select --switch /Applications/Xcode_16.3.app/Contents/Developer
 
-    
-      # Build signed Trio IPA file
+      - name: Xcode first launch + license
+        run: |
+          sudo xcodebuild -license accept
+          sudo xcodebuild -runFirstLaunch
+
+      - name: Ensure iOS platform installed
+        run: sudo xcodebuild -downloadPlatform iOS
+#end PJD4
+            # Build signed Trio IPA file
       - name: Fastlane Build & Archive
         run: bundle exec fastlane build_trio
         env:
