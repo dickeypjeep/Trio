@@ -367,6 +367,9 @@ jobs:
       - name: Fastlane Build & Archive
         run: bundle exec fastlane build_trio
         env:
+          FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT: 120
+          FASTLANE_XCODEBUILD_DEBUG: "1"
+          DEVELOPER_DIR: /Applications/Xcode_16.3.app/Contents/Developer
           TEAMID: ${{ secrets.TEAMID }}
           GH_PAT: ${{ secrets.GH_PAT }}
           FASTLANE_KEY_ID: ${{ secrets.FASTLANE_KEY_ID }}
