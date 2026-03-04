@@ -334,6 +334,35 @@ jobs:
           xcodebuild -showsdks
 
     #end PJD #2
+
+    #PJD #3
+      - name: Confirm iPhoneOS platform exists
+        shell: bash
+        run: |
+          set -euxo pipefail
+
+          ls -ld /Applications/Xcode_16.3.app/Contents/Developer/Platforms/iPhoneOS.platform || true
+          xcrun --sdk iphoneos --show-sdk-path || true
+
+          echo "Workspaces:"
+          ls -1 *.xcworkspace || true
+
+          echo "Projects:"
+          ls -1 *.xcodeproj || true
+
+          echo "xcodebuild -list:"
+          xcodebuild -list || true
+
+          echo "Show destinations (if workspace exists):"
+          if [ -d "Trio.xcworkspace" ]; then
+            xcodebuild -showdestinations -scheme "Trio" -workspace "Trio.xcworkspace" || true
+          else
+            echo "Trio.xcworkspace not found; skipping showdestinations."
+          fi
+
+    #end PJD3
+
+    
       # Build signed Trio IPA file
       - name: Fastlane Build & Archive
         run: bundle exec fastlane build_trio
