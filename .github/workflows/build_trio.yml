@@ -325,6 +325,17 @@ jobs:
 
 
 #Patch for the SDK error that presented on Jan 10th 2026.
+      - name: Select Xcode version
+        run: sudo xcode-select --switch /Applications/Xcode_16.3.app/Contents/Developer
+
+      - name: Xcode first launch + license
+        run: |
+          sudo xcodebuild -license accept
+          sudo xcodebuild -runFirstLaunch
+
+      - name: Ensure iOS platform installed
+        run: sudo xcodebuild -downloadPlatform iOS
+
       - name: Ensure platforms installed (workaround)
         run: |
           sudo xcodebuild -downloadPlatform iOS
