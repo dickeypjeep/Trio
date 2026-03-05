@@ -220,11 +220,7 @@ jobs:
         run: "sudo xcode-select --switch /Applications/Xcode_16.3.app/Contents/Developer"
 
       
-      - name: Show Xcode and SDKs
-        run: |
-          xcode-select -p
-          xcodebuild -version
-          xcodebuild -showsdks
+     
       
       - name: Checkout Repo for syncing
         if: |
