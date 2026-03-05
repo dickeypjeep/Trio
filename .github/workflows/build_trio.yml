@@ -373,6 +373,15 @@ jobs:
       - name: Ensure iOS platform installed
         run: sudo xcodebuild -downloadPlatform iOS
 #end PJD4
+
+#pjd5
+      - name: Ensure platforms installed (workaround)
+        run: |
+          sudo xcodebuild -downloadPlatform iOS
+          sudo xcodebuild -downloadPlatform watchOS
+#end PJD5
+
+    
             # Build signed Trio IPA file
       - name: Fastlane Build & Archive
         run: bundle exec fastlane build_trio
